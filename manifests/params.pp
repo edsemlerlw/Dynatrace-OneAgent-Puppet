@@ -6,6 +6,7 @@ class dynatraceoneagent::params {
 
   # OneAgent Download Parameters
   $tenant_url         = undef
+  $tenant_token       = undef
   $paas_token         = undef
   $api_path           = '/api/v1/deployment/installer/agent/'
   $version            = 'latest'
