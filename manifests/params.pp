@@ -65,8 +65,8 @@ class dynatraceoneagent::params {
     $hostmetadata_config_file           = "${oneagent_puppet_conf_dir}\\hostcustomproperties.conf"
     $oneagent_infraonly_config_file     = "${oneagent_puppet_conf_dir}\\infraonly.conf"
     $oneagent_networkzone_config_file   = "${oneagent_puppet_conf_dir}\\networkzone.conf"
-    $onagent_tenant_id_config_file      = "${oneagent_puppet_conf_dir}\\tenant_id.conf"
-    $onagent_tenant_token_config_file   = "${oneagent_puppet_conf_dir}\\tenant_token.conf"
+    $oneagent_tenant_id_config_file      = "${oneagent_puppet_conf_dir}\\tenant_id.conf"
+    $oneagent_tenant_token_config_file   = "${oneagent_puppet_conf_dir}\\tenant_token.conf"
   } elsif ($facts['kernel'] == 'Linux') or ($facts['os']['family'] == 'AIX') {
     #Parameters for Linux/AIX OneAgent Download
     $download_dir               = '/tmp'
@@ -88,7 +88,7 @@ class dynatraceoneagent::params {
     $hostname_config_file               = "${oneagent_puppet_conf_dir}/hostname.conf"
     $oneagent_infraonly_config_file     = "${oneagent_puppet_conf_dir}/infraonly.conf"
     $oneagent_networkzone_config_file   = "${oneagent_puppet_conf_dir}/networkzone.conf"
-    $onagent_tenant_id_config_file      = "${oneagent_puppet_conf_dir}/tenant_id.conf"
-    $onagent_tenant_token_config_file   = "${oneagent_puppet_conf_dir}/tenant_token.conf"
+    $oneagent_tenant_id_config_file      = "${oneagent_puppet_conf_dir}/tenant_id.conf"
+    $oneagent_tenant_token_config_file   = "${oneagent_puppet_conf_dir}/tenant_token.conf"
   }
 }
