@@ -11,9 +11,13 @@
 # @param global_mode
 #   Sets the permissions for any files that don't have 
 #   this assignment either set manually or by the OneAgent installer
+# @param tenant_id
+#   first part of tenant url
 # @param tenant_url
 #   URL of your dynatrace Tenant
 #   Managed `https://{your-domain}/e/{your-environment-id}` - SaaS `https://{your-environment-id}.live.dynatrace.com`
+# @param tenant_token
+#   your dynatrace Tenant token
 # @param paas_token
 #   Paas token for downloading the OneAgent installer
 # @param api_path
@@ -110,7 +114,9 @@ class dynatraceoneagent (
   String $global_mode  = $dynatraceoneagent::params::global_mode,
 
 # OneAgent Download Parameters
+  String $tenant_id                     = $dyantraceoneagent::params::tenant_id,
   String $tenant_url                    = $dynatraceoneagent::params::tenant_url,
+  String $tenant_token                  = $dynatraceoneagent::params::tenant_token,
   String $paas_token                    = $dynatraceoneagent::params::paas_token,
   String $api_path                      = $dynatraceoneagent::params::api_path,
   String $version                       = $dynatraceoneagent::params::version,
