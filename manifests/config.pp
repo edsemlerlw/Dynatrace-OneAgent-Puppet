@@ -34,6 +34,8 @@ class dynatraceoneagent::config {
   $hostname_config_file                = $dynatraceoneagent::hostname_config_file
   $oneagent_infraonly_config_file      = $dynatraceoneagent::oneagent_infraonly_config_file
   $oneagent_networkzone_config_file    = $dynatraceoneagent::oneagent_networkzone_config_file
+  $oneagent_tenant_id_config_file      = $dynatraceoneagent::oneagent_tenant_id_config_file
+  $oneagent_tenant_token_config_file   = $dynatraceoneagent::oneagent_tenant_token_config_file
 
   #if ($service_state != 'stopped') {
 
