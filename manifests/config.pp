@@ -24,6 +24,8 @@ class dynatraceoneagent::config {
   $hostname                            = $dynatraceoneagent::hostname
   $infra_only                          = $dynatraceoneagent::infra_only
   $network_zone                        = $dynatraceoneagent::network_zone
+  $tenant_id                           = $dynatraceoneagent::tenant_id
+  $tenant_token                        = $dynatraceoneagent::tenant_token
   $oneagent_puppet_conf_dir            = $dynatraceoneagent::oneagent_puppet_conf_dir
   $oneagent_comms_config_file          = $dynatraceoneagent::oneagent_comms_config_file
   $oneagent_logmonitoring_config_file  = $dynatraceoneagent::oneagent_logmonitoring_config_file
@@ -187,6 +189,34 @@ class dynatraceoneagent::config {
     }
   }
 
+  if $tenant_id{
+    file { $oneagent_tenant_id_config_file:
+      ensure  => file,
+      content => $tenant_id,
+      notify  => Exec['set_tenant_id'],
+      mode    => $global_mode,
+    }
+  } else {
+    file { $oneagent_tenant_id_config_file:
+      ensure => absent,
+      notify => Exec['unset_tenant_id'],
+    }
+  }
+
+  if $tenant_token{
+    file { $oneagent_tenant_token_config_file:
+      ensure  => file,
+      content => $tenant_id,
+      notify  => Exec['set_tenant_token'],
+      mode    => $global_mode,
+    }
+  } else {
+    file { $oneagent_tenant_token_config_file:
+      ensure => absent,
+      notify => Exec['unset_tenant_token'],
+    }
+  }
+
   exec { 'set_oneagent_communication':
     command     => "${oactl} ${oneagent_communication_params} --restart-service",
     path        => $oneagentctl_exec_path,
@@ -326,5 +356,46 @@ class dynatraceoneagent::config {
     logoutput   => on_failure,
     refreshonly => true,
   }
+
+  exec { 'set_tenant_id':
+    command     => "${oactl} --set-tenant=${tenant_id} --restart-service",
+    path        => $oneagentctl_exec_path,
+    cwd         => $oneagent_tools_dir,
+    timeout     => 6000,
+    provider    => $provider,
+    logoutput   => on_failure,
+    refreshonly => true,
+  }
+
+  exec { 'unset_tenant_id':
+    command     => "${oactl} --set-tenant-id=\"\" --restart-service",
+    path        => $oneagentctl_exec_path,
+    cwd         => $oneagent_tools_dir,
+    timeout     => 6000,
+    provider    => $provider,
+    logoutput   => on_failure,
+    refreshonly => true,
+  }
+
+  exec { 'set_tenant_token':
+    command     => "${oactl} --set-tenant-token=${tenant_token} --restart-service",
+    path        => $oneagentctl_exec_path,
+    cwd         => $oneagent_tools_dir,
+    timeout     => 6000,
+    provider    => $provider,
+    logoutput   => on_failure,
+    refreshonly => true,
+  }
+
+  exec { 'unset_tenant_token':
+    command     => "${oactl} --set-tenant-token=\"\" --restart-service",
+    path        => $oneagentctl_exec_path,
+    cwd         => $oneagent_tools_dir,
+    timeout     => 6000,
+    provider    => $provider,
+    logoutput   => on_failure,
+    refreshonly => true,
+  }
+  
   #}
 }
