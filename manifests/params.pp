@@ -5,6 +5,7 @@ class dynatraceoneagent::params {
   $global_mode = '0644'
 
   # OneAgent Download Parameters
+  $tenant_id          = undef
   $tenant_url         = undef
   $tenant_token       = undef
   $paas_token         = undef
